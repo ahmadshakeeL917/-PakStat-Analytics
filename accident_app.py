@@ -22,48 +22,48 @@ st.markdown("""
 <style>
   html, body, [data-testid="stAppViewContainer"],
   [data-testid="stHeader"], [data-testid="stToolbar"] {
-      background-color: #0d0014 !important;
-      color: #e8d5ff !important;
+      background-color: #0d0d0d !important;
+      color: #e0e0e0 !important;
   }
   [data-testid="stSidebar"] {
-      background-color: #100018 !important;
-      border-right: 1px solid #2a0050;
+      background-color: #111111 !important;
+      border-right: 1px solid #222;
   }
-  [data-testid="stSidebar"] * { color: #c9a0f0 !important; }
+  [data-testid="stSidebar"] * { color: #aaaaaa !important; }
   .block-container { padding-top: 1.2rem !important; }
 
   .logo-bar { padding: 20px 20px 4px; }
   .logo-text { font-size: 1.55rem; font-weight: 900; letter-spacing: -1px; }
   .logo-pak  { color: #ffffff; }
-  .logo-stat { color: #bf40ff; }
-  .logo-sub  { font-size: 0.65rem; letter-spacing: 3.5px; color: #3a1060;
+  .logo-stat { color: #e50914; }
+  .logo-sub  { font-size: 0.65rem; letter-spacing: 3.5px; color: #444444;
                text-transform: uppercase; padding: 2px 20px 18px; }
-  .nav-label { font-size: 0.62rem; letter-spacing: 2.5px; color: #3a1060;
+  .nav-label { font-size: 0.62rem; letter-spacing: 2.5px; color: #444444;
                text-transform: uppercase; padding: 16px 20px 6px; }
 
-  .page-title { font-size: 1.75rem; font-weight: 800; color: #f0d0ff; margin-bottom: 4px; }
-  .page-sub   { font-size: 0.86rem; color: #5a2080; margin-bottom: 1rem; }
-  .divider    { border: none; border-top: 1px solid #2a0050; margin: 0.4rem 0 1.2rem; }
+  .page-title { font-size: 1.75rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
+  .page-sub   { font-size: 0.86rem; color: #444444; margin-bottom: 1rem; }
+  .divider    { border: none; border-top: 1px solid #1e1e1e; margin: 0.4rem 0 1.2rem; }
 
   .kpi-card {
-      background: #14001f;
-      border: 1px solid #2a0050;
-      border-top: 2px solid #bf40ff;
+      background: #141414;
+      border: 1px solid #1e1e1e;
+      border-top: 2px solid #e50914;
       border-radius: 10px; padding: 16px 18px;
   }
-  .kpi-label { font-size: 0.70rem; color: #5a2080; text-transform: uppercase;
+  .kpi-label { font-size: 0.70rem; color: #444444; text-transform: uppercase;
                letter-spacing: 1.5px; margin-bottom: 6px; }
-  .kpi-value { font-size: 1.85rem; font-weight: 800; color: #f0d0ff; }
-  .kpi-delta { font-size: 0.76rem; color: #bf40ff; margin-top: 4px; }
+  .kpi-value { font-size: 1.85rem; font-weight: 800; color: #ffffff; }
+  .kpi-delta { font-size: 0.76rem; color: #e50914; margin-top: 4px; }
 
-  .sec-hdr { font-size: 0.72rem; color: #5a2080; text-transform: uppercase;
+  .sec-hdr { font-size: 0.72rem; color: #444444; text-transform: uppercase;
              letter-spacing: 2px; margin: 1.4rem 0 0.6rem;
              border-bottom: 1px solid #1e0035; padding-bottom: 5px; }
 
-  .insight { background: #14001f; border: 1px solid #2a0050;
-             border-left: 3px solid #bf40ff;
+  .insight { background: #141414; border: 1px solid #1e1e1e;
+             border-left: 3px solid #e50914;
              padding: 10px 14px; border-radius: 6px;
-             font-size: 0.84rem; color: #c9a0f0; margin: 10px 0; }
+             font-size: 0.84rem; color: #aaaaaa; margin: 10px 0; }
 
   #MainMenu, footer, header { visibility: hidden; }
   .stDeployButton { display: none; }
@@ -72,37 +72,37 @@ st.markdown("""
       padding: 9px 20px !important;
       font-size: 0.90rem !important;
       font-weight: 500 !important;
-      color: #7040a0 !important;
+      color: #666666 !important;
       border-left: 3px solid transparent !important;
       border-radius: 0 !important;
       display: block !important;
   }
-  div[role="radiogroup"] label:hover { color: #f0d0ff !important; }
+  div[role="radiogroup"] label:hover { color: #ffffff !important; }
 
-  .stSlider > div > div { background: #2a0050 !important; }
-  .stSelectbox > div > div { background: #14001f !important; color: #e8d5ff !important; }
-  .stMultiSelect > div > div { background: #14001f !important; color: #e8d5ff !important; }
+  .stSlider > div > div { background: #1e1e1e !important; }
+  .stSelectbox > div > div { background: #141414 !important; color: #e0e0e0 !important; }
+  .stMultiSelect > div > div { background: #141414 !important; color: #e0e0e0 !important; }
   .stButton > button {
-      background: #1e0035 !important; color: #bf40ff !important;
-      border: 1px solid #bf40ff !important; border-radius: 8px !important;
+      background: #1a0000 !important; color: #e50914 !important;
+      border: 1px solid #e50914 !important; border-radius: 8px !important;
   }
-  .stButton > button:hover { background: #2a0050 !important; }
-  .stDataFrame { background: #14001f !important; }
+  .stButton > button:hover { background: #1e1e1e !important; }
+  .stDataFrame { background: #141414 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-PURPLE = "#bf40ff"
+PURPLE = "#e50914"
 DARK   = dict(
-    paper_bgcolor="#0d0014",
-    plot_bgcolor="#100018",
-    font=dict(color="#c9a0f0", family="Arial"),
-    xaxis=dict(gridcolor="#1e0035", linecolor="#2a0050", zerolinecolor="#2a0050"),
-    yaxis=dict(gridcolor="#1e0035", linecolor="#2a0050", zerolinecolor="#2a0050"),
-    legend=dict(bgcolor="#14001f", bordercolor="#2a0050", borderwidth=1),
+    paper_bgcolor="#0d0d0d",
+    plot_bgcolor="#111111",
+    font=dict(color="#aaaaaa", family="Arial"),
+    xaxis=dict(gridcolor="#1e0035", linecolor="#1e1e1e", zerolinecolor="#1e1e1e"),
+    yaxis=dict(gridcolor="#1e0035", linecolor="#1e1e1e", zerolinecolor="#1e1e1e"),
+    legend=dict(bgcolor="#141414", bordercolor="#1e1e1e", borderwidth=1),
     margin=dict(t=45, b=40, l=50, r=20),
 )
-COLORS = ["#bf40ff","#e040ff","#ff40bf","#ff6b6b","#ffa94d","#ffe066","#69db7c","#4dabf7"]
-SCALE  = [[0,"#0d0014"],[0.3,"#3a0060"],[0.7,"#7a00c0"],[1,"#bf40ff"]]
+COLORS = ["#e50914","#ff6b6b","#ffa94d","#ff6b6b","#ffa94d","#ffe066","#69db7c","#4dabf7"]
+SCALE  = [[0,"#0d0d0d"],[0.3,"#2a0000"],[0.7,"#990000"],[1,"#e50914"]]
 
 @st.cache_data
 def load_data():
@@ -161,7 +161,7 @@ with st.sidebar:
     all_cause = sorted(df["Cause"].unique())
     sel_cause = st.multiselect("Cause", all_cause, default=all_cause)
     st.markdown("---")
-    st.markdown('<div style="font-size:0.70rem;color:#3a1060;padding:6px 0;">Source: Kaggle — RTA Dataset Pakistan<br>Records: 46,187 | Variables: 31<br>Period: 2020-2023</div>', unsafe_allow_html=True)
+    st.markdown('<div style="font-size:0.70rem;color:#444444;padding:6px 0;">Source: Kaggle — RTA Dataset Pakistan<br>Records: 46,187 | Variables: 31<br>Period: 2020-2023</div>', unsafe_allow_html=True)
 
 mask = (
     df["Year"].between(*yr_range) &
@@ -178,10 +178,10 @@ if page == "Home":
     <div style="display:flex;flex-direction:column;align-items:center;
                 justify-content:center;min-height:78vh;text-align:center;">
         <div style="font-size:5rem;font-weight:900;letter-spacing:-3px;line-height:1;">
-            <span style="color:#ffffff;">Pak</span><span style="color:#bf40ff;">Stat</span>
+            <span style="color:#ffffff;">Pak</span><span style="color:#e50914;">Stat</span>
         </div>
-        <div style="width:120px;height:2px;background:linear-gradient(90deg,transparent,#bf40ff,transparent);margin:20px auto;"></div>
-        <div style="font-size:0.88rem;color:#5a2080;letter-spacing:4px;text-transform:uppercase;">
+        <div style="width:120px;height:2px;background:linear-gradient(90deg,transparent,#e50914,transparent);margin:20px auto;"></div>
+        <div style="font-size:0.88rem;color:#444444;letter-spacing:4px;text-transform:uppercase;">
             Advanced Road Accident Analytics &mdash; powered by real data.
         </div>
     </div>
@@ -231,9 +231,9 @@ elif page == "Channel Overview":
         acc_type = d["ACCLASS"].value_counts().reset_index()
         acc_type.columns = ["Type","Count"]
         fig = px.pie(acc_type, names="Type", values="Count", title="Fatal vs Non-Fatal",
-                     hole=0.55, color_discrete_sequence=[PURPLE,"#3a0060"])
+                     hole=0.55, color_discrete_sequence=[PURPLE,"#2a0000"])
         fig.update_layout(**DARK, height=360)
-        fig.update_traces(textfont_color="#f0d0ff", textfont_size=13)
+        fig.update_traces(textfont_color="#ffffff", textfont_size=13)
         st.plotly_chart(fig, use_container_width=True)
 
     c3,c4 = st.columns(2)
@@ -262,7 +262,7 @@ elif page == "Channel Overview":
         fig = px.pie(inj_df, names="Injury", values="Count", title="Injury Type Distribution",
                      hole=0.45, color_discrete_sequence=COLORS)
         fig.update_layout(**DARK, height=320)
-        fig.update_traces(textfont_color="#f0d0ff")
+        fig.update_traces(textfont_color="#ffffff")
         st.plotly_chart(fig, use_container_width=True)
     with c6:
         light_df = d["Light"].value_counts().reset_index()
@@ -304,7 +304,7 @@ elif page == "Descriptive Statistics":
         fig.add_trace(go.Histogram(x=vals, nbinsx=30, name="Observed",
                                    marker_color=PURPLE, opacity=0.55, histnorm="probability density"))
         fig.add_trace(go.Scatter(x=x_kde, y=kde(x_kde), mode="lines",
-                                 name="KDE", line=dict(color="#f0d0ff", width=2)))
+                                 name="KDE", line=dict(color="#ffffff", width=2)))
         fig.add_vline(x=mu, line_dash="dash", line_color="#ffa94d",
                       annotation_text=f"Mean={mu:.3f}", annotation_font_color="#ffa94d")
         fig.add_vline(x=vals.median(), line_dash="dot", line_color="#69db7c",
@@ -339,7 +339,7 @@ elif page == "Descriptive Statistics":
             x=[row["95% CI Lower"],row["Mean"],row["95% CI Upper"]],
             y=[row["Variable"]]*3, mode="lines+markers",
             line=dict(color=PURPLE, width=2),
-            marker=dict(size=[8,14,8], color=[PURPLE,"#f0d0ff",PURPLE]),
+            marker=dict(size=[8,14,8], color=[PURPLE,"#ffffff",PURPLE]),
             name=row["Variable"], showlegend=False))
     fig.update_layout(**DARK, title="95% Confidence Intervals", xaxis_title="Value", height=300)
     st.plotly_chart(fig, use_container_width=True)
@@ -348,7 +348,7 @@ elif page == "Descriptive Statistics":
     corr = d[num_cols].corr()
     fig = go.Figure(go.Heatmap(
         z=corr.values, x=corr.columns, y=corr.columns,
-        colorscale=[[0,"#0d0014"],[0.5,"#3a0060"],[1,"#bf40ff"]],
+        colorscale=[[0,"#0d0d0d"],[0.5,"#2a0000"],[1,"#e50914"]],
         text=corr.values.round(3), texttemplate="%{text}",
         textfont_size=12, showscale=True, zmin=-1, zmax=1))
     fig.update_layout(**DARK, title="Pearson Correlation Matrix", height=380)
@@ -407,7 +407,7 @@ elif page == "Growth Analysis":
                              mode="lines+markers+text",
                              text=yr_df["Avg_Response"].round(1),
                              textposition="top center",
-                             textfont=dict(color="#f0d0ff", size=10),
+                             textfont=dict(color="#ffffff", size=10),
                              line=dict(color="#4dabf7", width=2.5),
                              marker=dict(size=9, color=PURPLE),
                              fill="tozeroy", fillcolor="rgba(191,64,255,0.08)"))
@@ -436,8 +436,8 @@ elif page == "Probability Analysis":
                              marker_color=PURPLE, opacity=0.65))
         fig.add_trace(go.Scatter(x=k_range, y=pmf, mode="lines+markers",
                                  name=f"Poisson (lambda={lam:.2f})",
-                                 line=dict(color="#f0d0ff", width=2),
-                                 marker=dict(size=6, color="#f0d0ff")))
+                                 line=dict(color="#ffffff", width=2),
+                                 marker=dict(size=6, color="#ffffff")))
         fig.update_layout(**DARK, title=f"Poisson Fit — lambda = {lam:.3f}",
                           xaxis_title="Patients per Accident", yaxis_title="Probability", height=360)
         st.plotly_chart(fig, use_container_width=True)
@@ -456,7 +456,7 @@ elif page == "Probability Analysis":
                                    name="Observed", marker_color=PURPLE, opacity=0.55))
         fig.add_trace(go.Scatter(x=x_r, y=stats.norm.pdf(x_r, mu_r, sd_r), mode="lines",
                                  name=f"N(mu={mu_r:.1f}, sigma={sd_r:.1f})",
-                                 line=dict(color="#f0d0ff", width=2)))
+                                 line=dict(color="#ffffff", width=2)))
         fig.update_layout(**DARK, title="Normal Fit — Emergency Response Time",
                           xaxis_title="Response Time (min)", yaxis_title="Density", height=360)
         st.plotly_chart(fig, use_container_width=True)
@@ -520,11 +520,11 @@ elif page == "Probability Analysis":
         "P(Fatal|Cause)":"{:.4f}","Risk Lift":"{:.3f}"}),
         use_container_width=True)
     fig = px.bar(bayes_df, x="Cause", y="P(Fatal|Cause)", color="Risk Lift",
-                 color_continuous_scale=[[0,"#0d0014"],[1,"#bf40ff"]],
+                 color_continuous_scale=[[0,"#0d0d0d"],[1,"#e50914"]],
                  title="P(Fatal | Cause) — Bayesian Risk by Accident Cause")
-    fig.add_hline(y=p_fatal, line_dash="dash", line_color="#5a2080",
+    fig.add_hline(y=p_fatal, line_dash="dash", line_color="#444444",
                   annotation_text=f"Unconditional P(Fatal)={p_fatal:.4f}",
-                  annotation_font_color="#c9a0f0")
+                  annotation_font_color="#aaaaaa")
     fig.update_layout(**DARK, height=360, coloraxis_showscale=False)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -550,7 +550,7 @@ elif page == "Prediction Model":
         fig.add_trace(go.Scatter(x=sub["responsetime"], y=sub["Patients"], mode="markers",
                                  marker=dict(color=PURPLE, opacity=0.2, size=4), name="Data"))
         fig.add_trace(go.Scatter(x=x_line, y=lr.predict(x_line.reshape(-1,1)), mode="lines",
-                                 line=dict(color="#f0d0ff", width=2.5),
+                                 line=dict(color="#ffffff", width=2.5),
                                  name=f"y={lr.intercept_:.3f}+{lr.coef_[0]:.4f}x"))
         fig.update_layout(**DARK, title="Response Time vs Patients",
                           xaxis_title="Response Time (min)", yaxis_title="Patients", height=360)
@@ -588,7 +588,7 @@ elif page == "Prediction Model":
                         subplot_titles=("Residuals vs Fitted","Residual Distribution"))
     fig.add_trace(go.Scatter(x=y_pred, y=residuals, mode="markers",
                              marker=dict(color=PURPLE, opacity=0.3, size=4)), row=1, col=1)
-    fig.add_hline(y=0, line_dash="dash", line_color="#5a2080", row=1, col=1)
+    fig.add_hline(y=0, line_dash="dash", line_color="#444444", row=1, col=1)
     fig.add_trace(go.Histogram(x=residuals, nbinsx=30, marker_color=PURPLE, opacity=0.7), row=1, col=2)
     fig.update_layout(**DARK, height=320, showlegend=False)
     st.plotly_chart(fig, use_container_width=True)
@@ -626,9 +626,9 @@ elif page == "Best Time to Travel":
     pivot_td = pivot_td.reindex([x for x in day_order if x in pivot_td.index])
     fig = go.Figure(go.Heatmap(
         z=pivot_td.values, x=list(pivot_td.columns), y=list(pivot_td.index),
-        colorscale=[[0,"#0d0014"],[0.3,"#3a0060"],[0.7,"#7a00c0"],[1,"#bf40ff"]],
+        colorscale=[[0,"#0d0d0d"],[0.3,"#2a0000"],[0.7,"#990000"],[1,"#e50914"]],
         text=pivot_td.values, texttemplate="%{text}", textfont_size=9,
-        showscale=True, colorbar=dict(title="Accidents", tickfont=dict(color="#c9a0f0"))))
+        showscale=True, colorbar=dict(title="Accidents", tickfont=dict(color="#aaaaaa"))))
     fig.update_layout(**DARK, title="Accidents Heatmap — Time Slot x Day of Week",
                       xaxis_title="Time Slot", yaxis_title="Day of Week", height=380)
     st.plotly_chart(fig, use_container_width=True)
@@ -641,7 +641,7 @@ elif page == "Best Time to Travel":
         fig.add_trace(go.Bar(x=time_df["Time"], y=time_df["Accidents"],
                              marker_color=PURPLE, opacity=0.8, name="Accidents"))
         fig.add_trace(go.Scatter(x=time_df["Time"], y=time_df["Fatal"],
-                                 mode="lines+markers", line=dict(color="#f0d0ff", width=2),
+                                 mode="lines+markers", line=dict(color="#ffffff", width=2),
                                  marker=dict(size=7), name="Fatal"))
         fig.update_layout(**DARK, title="Accidents and Fatal Cases by Time Slot", height=340)
         st.plotly_chart(fig, use_container_width=True)
@@ -659,7 +659,7 @@ elif page == "Best Time to Travel":
         lgt_df = d.groupby("Light").agg(
             Accidents=("Year","count"), Fatal=("Is_Fatal","sum")).reset_index()
         fig = px.bar(lgt_df, x="Light", y="Accidents", color="Fatal",
-                     color_continuous_scale=[[0,"#0d0014"],[1,"#bf40ff"]],
+                     color_continuous_scale=[[0,"#0d0d0d"],[1,"#e50914"]],
                      title="Accidents by Light Condition")
         fig.update_layout(**DARK, height=320)
         st.plotly_chart(fig, use_container_width=True)
@@ -667,7 +667,7 @@ elif page == "Best Time to Travel":
         sea_df = d.groupby("Season").agg(
             Accidents=("Year","count"), Fatal=("Is_Fatal","sum")).reset_index()
         fig = px.bar(sea_df, x="Season", y="Accidents", color="Fatal",
-                     color_continuous_scale=[[0,"#0d0014"],[1,"#bf40ff"]],
+                     color_continuous_scale=[[0,"#0d0d0d"],[1,"#e50914"]],
                      title="Accidents by Season")
         fig.update_layout(**DARK, height=320)
         st.plotly_chart(fig, use_container_width=True)
@@ -684,7 +684,7 @@ elif page == "Severity Explorer":
 
     inj_order  = ["Minor","Single Fracture","Multiple Fractures","Head Injury","Spinal Injury"]
     inj_colors = {"Minor":"#69db7c","Single Fracture":"#ffe066",
-                  "Multiple Fractures":"#ffa94d","Head Injury":"#e040ff","Spinal Injury":"#bf40ff"}
+                  "Multiple Fractures":"#ffa94d","Head Injury":"#ff6b6b","Spinal Injury":"#e50914"}
 
     c1,c2 = st.columns(2)
     with c1:
@@ -722,7 +722,7 @@ elif page == "Severity Explorer":
     pivot_ci = pivot_ci.reindex(columns=[c for c in inj_order if c in pivot_ci.columns])
     fig = go.Figure(go.Heatmap(
         z=pivot_ci.values, x=list(pivot_ci.columns), y=list(pivot_ci.index),
-        colorscale=[[0,"#0d0014"],[1,"#bf40ff"]],
+        colorscale=[[0,"#0d0d0d"],[1,"#e50914"]],
         text=pivot_ci.values, texttemplate="%{text}", textfont_size=11))
     fig.update_layout(**{**DARK, "margin": dict(t=50,b=60,l=160,r=20)},
                       title="Accident Count — Cause vs Injury Type", height=360)
