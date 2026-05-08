@@ -149,7 +149,7 @@ with st.sidebar:
     <div class="logo-sub">Analytics Studio</div>
     """, unsafe_allow_html=True)
     st.markdown('<div class="nav-label">Pages</div>', unsafe_allow_html=True)
-    pages = ["Home","PAKSTATS Overview","Descriptive Statistics","Growth Analysis",
+    pages = ["Home","Channel Overview","Descriptive Statistics","Growth Analysis",
              "Probability Analysis","Prediction Model","Best Time to Travel","Severity Explorer"]
     page = st.radio("", pages, label_visibility="collapsed")
     st.markdown("---")
@@ -188,10 +188,10 @@ if page == "Home":
     """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
-# PAKSTATS OVERVIEW
+# CHANNEL OVERVIEW
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "PAKSTATS Overview":
-    st.markdown('<div class="page-title">PAKSTATS Overview</div>', unsafe_allow_html=True)
+elif page == "Channel Overview":
+    st.markdown('<div class="page-title">Channel Overview</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-sub">Pakistan Road Traffic Accident Statistics — 2020 to 2023</div>', unsafe_allow_html=True)
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
@@ -290,8 +290,7 @@ elif page == "Descriptive Statistics":
     desc["Variance"] = d[num_cols].var()
     desc = desc[["count","mean","std","Variance","min","25%","50%","75%","max","Skewness","Kurtosis"]]
     desc.columns = ["N","Mean","Std Dev","Variance","Min","Q1","Median","Q3","Max","Skewness","Kurtosis"]
-    st.dataframe(desc.style.format("{:.4f}").background_gradient(cmap="Purples", subset=["Mean","Std Dev"]),
-                 use_container_width=True)
+    st.dataframe(desc.style.format("{:.4f}"), use_container_width=True)
 
     c1,c2 = st.columns(2)
     with c1:
@@ -518,8 +517,7 @@ elif page == "Probability Analysis":
                                 "Risk Lift":round(p_fc/p_fatal,3) if p_fatal>0 else 0})
     bayes_df = pd.DataFrame(bayes_rows).sort_values("P(Fatal|Cause)", ascending=False)
     st.dataframe(bayes_df.style.format({"P(Cause)":"{:.4f}","P(Fatal)":"{:.4f}",
-        "P(Fatal|Cause)":"{:.4f}","Risk Lift":"{:.3f}"})
-        .background_gradient(cmap="Purples", subset=["P(Fatal|Cause)"]),
+        "P(Fatal|Cause)":"{:.4f}","Risk Lift":"{:.3f}"}),
         use_container_width=True)
     fig = px.bar(bayes_df, x="Cause", y="P(Fatal|Cause)", color="Risk Lift",
                  color_continuous_scale=[[0,"#0d0014"],[1,"#bf40ff"]],
@@ -737,6 +735,5 @@ elif page == "Severity Explorer":
         Avg_Vehicles=("Vehicles_Involved","mean")
     ).reindex([i for i in inj_order if i in d["InjuryType"].unique()]).round(3)
     sev_stats["Fatal_%"] = (sev_stats["Fatal_Cases"]/sev_stats["Count"]*100).round(2)
-    st.dataframe(sev_stats.style.format("{:.3f}").background_gradient(cmap="Purples", subset=["Fatal_%"]),
-                 use_container_width=True)
+    st.dataframe(sev_stats.style.format("{:.3f}"), use_container_width=True)
     st.markdown('<div class="insight"><b>Key Finding:</b> Head Injury and Spinal Injury cases have significantly higher response times and patient counts. Over Speed is the dominant cause across all injury types, accounting for the majority of severe cases.</div>', unsafe_allow_html=True)
