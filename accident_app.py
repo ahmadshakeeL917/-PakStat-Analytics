@@ -149,7 +149,7 @@ with st.sidebar:
     <div class="logo-sub">Analytics Studio</div>
     """, unsafe_allow_html=True)
     st.markdown('<div class="nav-label">Pages</div>', unsafe_allow_html=True)
-    pages = ["Home","Channel Overview","Descriptive Statistics","Growth Analysis",
+    pages = ["Home","Overview","Descriptive Statistics","Growth Analysis",
              "Probability Analysis","Prediction Model","Best Time to Travel","Severity Explorer"]
     page = st.radio("", pages, label_visibility="collapsed")
     st.markdown("---")
@@ -190,8 +190,8 @@ if page == "Home":
 # ══════════════════════════════════════════════════════════════════════════════
 # CHANNEL OVERVIEW
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "Channel Overview":
-    st.markdown('<div class="page-title">Channel Overview</div>', unsafe_allow_html=True)
+elif page == "Overview":
+    st.markdown('<div class="page-title">Overview</div>', unsafe_allow_html=True)
     st.markdown('<div class="page-sub">Pakistan Road Traffic Accident Statistics — 2020 to 2023</div>', unsafe_allow_html=True)
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
