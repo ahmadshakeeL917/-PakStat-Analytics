@@ -111,16 +111,10 @@ def load_data():
                 "CartInvovled","RickshawsInvolved","TractorInvovled","TrainsInvovled",
                 "TrucksInvolved","VansInvolved","OthersInvolved"]
     df["Vehicles_Involved"] = df[veh_cols].sum(axis=1).clip(lower=1)
-    def dominant_vehicle(row):
-        mapping = {"BicycleInvovled":"Bicycle","BikesInvolved":"Motorcycle",
-                   "BusesInvolved":"Bus","CarsInvolved":"Car","CartInvovled":"Cart",
-                   "RickshawsInvolved":"Rickshaw","TractorInvovled":"Tractor",
-                   "TrainsInvovled":"Train","TrucksInvolved":"Truck",
-                   "VansInvolved":"Van","OthersInvolved":"Other"}
-        vals = {mapping[c]: row[c] for c in veh_cols}
-        best = max(vals, key=vals.get)
-        return best if vals[best] > 0 else "Other"
-    df["Vehicle_Type"] = df.apply(dominant_vehicle, axis=1)
+    veh_label = ["Bicycle","Motorcycle","Bus","Car","Cart",
+                 "Rickshaw","Tractor","Train","Truck","Van","Other"]
+    df["Vehicle_Type"] = df[veh_cols].idxmax(axis=1).map(
+        dict(zip(veh_cols, veh_label))).fillna("Other")
     df["Is_Fatal"] = (df["ACCLASS"] == "Fatal").astype(int)
     sev_map = {"Minor":"Minor Injury","Single Fracture":"Serious Injury",
                "Multiple Fractures":"Serious Injury","Head Injury":"Fatal-Moderate",
@@ -138,6 +132,24 @@ def load_data():
     return df
 
 df = load_data()
+
+@st.cache_data
+def get_regression_models(data):
+    sub   = data[["responsetime","Patients"]].dropna()
+    X     = sub[["responsetime"]].values
+    y     = sub["Patients"].values
+    lr    = LinearRegression().fit(X, y)
+    y_pred= lr.predict(X)
+
+    X2p   = PolynomialFeatures(degree=2).fit_transform(data[["Vehicles_Involved"]].values)
+    lr2   = LinearRegression().fit(X2p, data["Patients"].values)
+
+    Xm_df = data[["responsetime","Vehicles_Involved"]].dropna()
+    Xm    = Xm_df.values
+    ym    = data.loc[Xm_df.index,"Patients"].values
+    lrm   = LinearRegression().fit(Xm, ym)
+
+    return lr, y_pred, X, y, lr2, lrm
 
 with st.sidebar:
     st.markdown("""
@@ -536,19 +548,25 @@ elif page == "Prediction Model":
     st.markdown('<div class="page-sub">Linear, Polynomial and Multiple Regression</div>', unsafe_allow_html=True)
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
+    lr, y_pred, X, y, lr2, lrm = get_regression_models(d)
+    r2   = r2_score(y, y_pred)
+    rmse = np.sqrt(mean_squared_error(y, y_pred))
+    poly = PolynomialFeatures(degree=2)
+    X2p  = poly.fit_transform(d[["Vehicles_Involved"]].values)
+    r2p  = r2_score(d["Patients"].values, lr2.predict(X2p))
+    Xm_df= d[["responsetime","Vehicles_Involved"]].dropna()
+    ym   = d.loc[Xm_df.index,"Patients"].values
+    r2m  = r2_score(ym, lrm.predict(Xm_df.values))
+
     c1,c2 = st.columns(2)
     with c1:
         st.markdown('<div class="sec-hdr">Linear Regression — Response Time vs Patients</div>', unsafe_allow_html=True)
         sub = d[["responsetime","Patients"]].dropna()
-        X = sub[["responsetime"]].values; y = sub["Patients"].values
-        lr = LinearRegression().fit(X, y)
-        y_pred = lr.predict(X)
-        r2   = r2_score(y, y_pred)
-        rmse = np.sqrt(mean_squared_error(y, y_pred))
         x_line = np.linspace(sub["responsetime"].min(), sub["responsetime"].max(), 200)
+        plot_sub = sub.sample(min(2000, len(sub)), random_state=42)
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=sub["responsetime"], y=sub["Patients"], mode="markers",
-                                 marker=dict(color=PURPLE, opacity=0.2, size=4), name="Data"))
+        fig.add_trace(go.Scatter(x=plot_sub["responsetime"], y=plot_sub["Patients"], mode="markers",
+                                 marker=dict(color=PURPLE, opacity=0.3, size=4), name="Data"))
         fig.add_trace(go.Scatter(x=x_line, y=lr.predict(x_line.reshape(-1,1)), mode="lines",
                                  line=dict(color="#ffffff", width=2.5),
                                  name=f"y={lr.intercept_:.3f}+{lr.coef_[0]:.4f}x"))
@@ -563,15 +581,11 @@ elif page == "Prediction Model":
 
     with c2:
         st.markdown('<div class="sec-hdr">Polynomial Regression — Vehicles vs Patients</div>', unsafe_allow_html=True)
-        X2 = d[["Vehicles_Involved"]].values; y2 = d["Patients"].values
-        poly = PolynomialFeatures(degree=2)
-        X2p  = poly.fit_transform(X2)
-        lr2  = LinearRegression().fit(X2p, y2)
-        r2p  = r2_score(y2, lr2.predict(X2p))
-        x_p  = np.linspace(1, d["Vehicles_Involved"].max(), 200)
+        x_p = np.linspace(1, d["Vehicles_Involved"].max(), 200)
+        plot_d2 = d[["Vehicles_Involved","Patients"]].sample(min(2000, len(d)), random_state=42)
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=d["Vehicles_Involved"], y=d["Patients"], mode="markers",
-                                 marker=dict(color=PURPLE, opacity=0.2, size=4), name="Data"))
+        fig.add_trace(go.Scatter(x=plot_d2["Vehicles_Involved"], y=plot_d2["Patients"], mode="markers",
+                                 marker=dict(color=PURPLE, opacity=0.3, size=4), name="Data"))
         fig.add_trace(go.Scatter(x=x_p, y=lr2.predict(poly.transform(x_p.reshape(-1,1))),
                                  mode="lines", line=dict(color="#ffa94d", width=2.5),
                                  name=f"Poly R2={r2p:.4f}"))
@@ -580,13 +594,14 @@ elif page == "Prediction Model":
         st.plotly_chart(fig, use_container_width=True)
         mc1,mc2 = st.columns(2)
         mc1.metric("Polynomial R Squared", f"{r2p:.4f}")
-        mc2.metric("RMSE", f"{np.sqrt(mean_squared_error(y2, lr2.predict(X2p))):.4f}")
+        mc2.metric("RMSE", f"{np.sqrt(mean_squared_error(d['Patients'].values, lr2.predict(X2p))):.4f}")
 
     st.markdown('<div class="sec-hdr">Residual Analysis</div>', unsafe_allow_html=True)
     residuals = y - y_pred
+    plot_idx  = np.random.choice(len(residuals), min(2000, len(residuals)), replace=False)
     fig = make_subplots(rows=1, cols=2,
                         subplot_titles=("Residuals vs Fitted","Residual Distribution"))
-    fig.add_trace(go.Scatter(x=y_pred, y=residuals, mode="markers",
+    fig.add_trace(go.Scatter(x=y_pred[plot_idx], y=residuals[plot_idx], mode="markers",
                              marker=dict(color=PURPLE, opacity=0.3, size=4)), row=1, col=1)
     fig.add_hline(y=0, line_dash="dash", line_color="#444444", row=1, col=1)
     fig.add_trace(go.Histogram(x=residuals, nbinsx=30, marker_color=PURPLE, opacity=0.7), row=1, col=2)
@@ -600,11 +615,7 @@ elif page == "Prediction Model":
     with p2:
         pred_veh  = st.slider("Vehicles Involved", 1, 7, 2)
 
-    Xm  = d[["responsetime","Vehicles_Involved"]].dropna().values
-    ym  = d.loc[d[["responsetime","Vehicles_Involved"]].dropna().index,"Patients"].values
-    lrm = LinearRegression().fit(Xm, ym)
     pred_val = max(1, lrm.predict([[pred_resp, pred_veh]])[0])
-    r2m = r2_score(ym, lrm.predict(Xm))
     rr1,rr2,rr3 = st.columns(3)
     rr1.metric("Predicted Patients", f"{pred_val:.2f}")
     rr2.metric("Multiple R Squared", f"{r2m:.4f}")
